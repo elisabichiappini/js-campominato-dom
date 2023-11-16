@@ -1,0 +1,221 @@
+/****************************************************************
+FILE CSS
+****************************************************************/
+
+
+/*
+-------------------reset-------------------
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*
+-------------------variabili-------------------
+*/
+
+:root {
+    --bg-color: #7fffd4;
+    --bg-color-element: #031732;
+}
+
+/*
+-------------------common-------------------
+*/
+
+body {
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    font-family: 'Kanit', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--bg-color-element);
+}
+
+#topbar {
+    height: 120px;
+    width: 100%;
+}
+
+#bottom {
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    z-index: 99;
+}
+
+#board {
+    height: calc(100vh - 200px);
+    background-color: var(--bg-color);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* scroll bar */
+    overflow: auto;
+}
+
+#bottom-board {
+    /* il contenitore magia il contenuto */
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.image {
+    width: 60px;
+    display: block;
+}
+
+#top-left,
+#top-right {
+    padding: 0 20px;
+}
+
+.play,
+.reset {
+    padding: 0 40px;
+}
+
+.link {
+    color: var(--bg-color-element);
+}
+
+.box-celle {
+    height: 77vh;
+    width: 77vh;
+    margin: 0 auto;
+    display: none;
+}
+
+.box-celle > .cella {
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    border: 1px solid;
+}
+
+.logo {
+    vertical-align: middle;
+}
+
+.play-text > em{
+    color:rgb(186, 186, 186);
+}
+
+.blu {
+    background-color: blue;
+}
+
+/*
+-------------------typography-------------------
+*/
+
+body {
+    font-family: 'Kanit', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: 30px;
+    vertical-align: middle;
+}
+
+h2 {
+    padding: 0 0 20px;
+}
+
+#bottom > span i {
+    font-size: 10px;
+}
+
+/*
+-------------------utilites-------------------
+*/
+
+.text-center {
+    text-align: center;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.space-btw {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.g-20 {
+    gap: 20px;
+}
+
+.py-20 {
+    padding: 20px;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.align-start {
+   align-items: flex-start;
+}
+
+.active {
+    display: block;
+}
+
+.d-none {
+    display: none;
+}
+/*
+-------------------debug-------------------
+*/
+
+.debug #topbar {
+    background-color: rgb(64, 64, 213);
+    border: 1px dashed rgb(221, 221, 5);
+}
+
+.debug #board {
+    background-color: rgb(245, 165, 245);
+}
+
+.debug #bottom {
+    background-color: #13ad7a;
+    border: 1px dashed rgb(255, 255, 255);
+}
+
+.debug #top-left,
+.debug #top-right {
+    background-color: rgb(220, 220, 89);
+    border: 1px dashed rgb(0, 0, 0);
+}
+
+.debug .container {
+    background-color: gray;
+    border: 1px dashed rgb(255, 255, 255);
+}
+
+.debug #bottom-grid {
+    background-color: antiquewhite;
+    border: 1px dashed rgb(255, 255, 255);
+}
+
+.debug .box-celle {
+    background-color: rgb(209, 36, 36);
+    border: 1px dashed rgb(0, 0, 0);
+}
+
+.debug .box-celle > .cella {
+    background-color:rgb(222, 111, 111);
+    border: 1px dashed white;
+}
