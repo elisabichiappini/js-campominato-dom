@@ -79,9 +79,7 @@ function createBoard (mainElement, cellNumber) {
 
 // campominato
 function campoMinato () {
-    console.log(textPlay);
     textPlay.classList.add('d-none');
-    console.log('ho cliccato play');
     let level = 'pro'; //TODO SELECT INPUT UTENTE
     const cellNumber = setCellNumber(level);
     console.log(cellNumber);
@@ -106,6 +104,8 @@ const resetButton = document.querySelector('input.reset');
 
 const textPlay = document.querySelector('.play-text');
 
+const levelGame = document.getElementById('level-game');
+
 boxCelle.classList.add('box-celle','d-flex', 'flex-wrap', 'text-center', 'align-start');
 
 gridGame.append(boxCelle);
@@ -120,5 +120,3 @@ playButton.addEventListener('click', campoMinato);
 // - bottonePlay genera 16 numeri random (arrayBomba[]) per ciascun livelloGioco (Attenzione: 1 cella 1 bomba,ossia arrayBomba 16 numeri !==).
 // - Se gamerCm click cella === arrayBomba[] allora, "abbiamo calpestato una bomba", elemento add class gameOver(bg rosso), Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
 // - end quando gamer click su cellaBomba OR n click === (livellocella-celleBomba) allora stampo console e DOM punteggio === n click Cella.
-
-
