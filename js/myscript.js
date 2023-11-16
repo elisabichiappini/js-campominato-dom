@@ -1,6 +1,5 @@
-/****************************************************************
+/***************************************************************
 FILE JAVASCRIPT
-
 ***************************************************************/
 
 'use strict';
@@ -23,8 +22,8 @@ FILE JAVASCRIPT
             <div class="cella">13</div>
             <div class="cella">14</div>
         </div>  */
-// - Se gamer clicca su bottonePlay allora campoMinato add classe active;
-// - Se gamer clicca su cellaCampo, allora cellaCampo cambia colore (azzurro) + stampo in console numero cellaCampo su cui ho cliccato.
+// 3- Se gamer clicca su bottonePlay allora campoMinato add classe active;
+// 4- Se gamer clicca su cellaCampo, allora cellaCampo cambia colore (azzurro) + stampo in console numero cellaCampo su cui ho cliccato.
 
 
 
@@ -38,21 +37,55 @@ function generatoreElementiDom (tag, className, content) {
     return elementoDom;
 }
 
-// campominato
-function campoMinato () {
-    console.log(textPlay);
-    textPlay.classList.add('d-none');
-    console.log('ho cliccato play');
-    for(let i = 1; i <= celleLivello1; i++) {
+//funzione calcolo logica del cellNumber
+function setCellNumber(level) {
+    let cellNumber;
+    switch (level) {
+        case 'intermedio':
+            cellNumber = 81;
+            break;
+        case 'pro':
+            cellNumber = 49;
+            break;
+        case 'principiante':
+        default:
+            cellNumber = 100;
+            break;
+    }
+    return cellNumber;
+}
+
+//funzione creazione della board in base al livello scelto dall'utente
+function createBoard (mainElement, cellNumber) {
+    const celle = Math.sqrt(cellNumber);
+
+    const fragment = document.createDocumentFragment();
+    for(let i = 1; i <= cellNumber; i++) {
         //invocata funzione (generatore elementi in DOM) in altra funzione
         const myElementDom = generatoreElementiDom('div', 'cella', i);
-        boxCelle.append(myElementDom);
+        // myElementDom.style.width = `calc(100% / ${celle})`;
+        // myElementDom.style.height = myElementDom.style.width;
+        myElementDom.classList.add(`cella-${celle}`);
+        fragment.append(myElementDom);
         myElementDom.addEventListener('click', 
         function() {
             myElementDom.classList.add('blu')
             console.log(i);
         })
-    };
+    }
+    mainElement.append(fragment);
+};
+
+
+// campominato
+function campoMinato () {
+    console.log(textPlay);
+    textPlay.classList.add('d-none');
+    console.log('ho cliccato play');
+    let level = 'pro'; //TODO SELECT INPUT UTENTE
+    const cellNumber = setCellNumber(level);
+    console.log(cellNumber);
+    createBoard(boxCelle, cellNumber);
 };
 
 
@@ -81,7 +114,11 @@ playButton.addEventListener('click', campoMinato);
 
 
 
+
+
 // FASE 2
 // - bottonePlay genera 16 numeri random (arrayBomba[]) per ciascun livelloGioco (Attenzione: 1 cella 1 bomba,ossia arrayBomba 16 numeri !==).
 // - Se gamerCm click cella === arrayBomba[] allora, "abbiamo calpestato una bomba", elemento add class gameOver(bg rosso), Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
 // - end quando gamer click su cellaBomba OR n click === (livellocella-celleBomba) allora stampo console e DOM punteggio === n click Cella.
+
+

@@ -93,10 +93,22 @@ body {
     display: none;
 }
 
-.box-celle > .cella {
+.cella {
+    border: 1px solid;
+}
+
+.cella-10 {
     width: calc(100% / 10);
     height: calc(100% / 10);
-    border: 1px solid;
+}
+
+.cella-9 {
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+.cella-7 {
+    width: calc(100% / 7);
+    height: calc(100% / 7);
 }
 
 .logo {
@@ -176,6 +188,7 @@ h2 {
 .d-none {
     display: none;
 }
+
 /*
 -------------------debug-------------------
 */
