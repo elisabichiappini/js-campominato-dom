@@ -6,22 +6,21 @@ FILE JAVASCRIPT
 // FASE 1
 // 1- Struttura gioco inizializzata HTML e Css (Header e Footer);
 // 2- Griglia: struttura celle innestata con Javascript: rappresentazione 100 caselle, con un numero compreso tra 1 e 100, divise in 10 caselle per 10 righe;
-    /*  <div class="box-celle d-flex flex-wrap text-center align-start">
-            <div class="cella">1</div>
-            <div class="cella">2</div>
-            <div class="cella">3</div>
-            <div class="cella">4</div>
-            <div class="cella">5</div>
-            <div class="cella">6</div>
-            <div class="cella">7</div>
-            <div class="cella">8</div>
-            <div class="cella">9</div>
-            <div class="cella">10</div>
-            <div class="cella">11</div>
-            <div class="cella">12</div>
-            <div class="cella">13</div>
-            <div class="cella">14</div>
-        </div>  */
+  /*<div class="cella">1</div>
+    <div class="cella">2</div>
+    <div class="cella">3</div>
+    <div class="cella">4</div>
+    <div class="cella">5</div>
+    <div class="cella">6</div>
+    <div class="cella">7</div>
+    <div class="cella">8</div>
+    <div class="cella">9</div>
+    <div class="cella">10</div>
+    <div class="cella">11</div>
+    <div class="cella">12</div>
+    <div class="cella">13</div>
+    <div class="cella">14</div>
+    </div>  */
 // 3- Se gamer clicca su bottonePlay allora campoMinato add classe active;
 // 4- Se gamer clicca su cellaCampo, allora cellaCampo cambia colore (azzurro) + stampo in console numero cellaCampo su cui ho cliccato.
 
@@ -30,12 +29,13 @@ FILE JAVASCRIPT
 //                          FUNCTIONS
 
 // generatore elementi in DOM
-function generatoreElementiDom (tag, className, content) {
-    const elementoDom = document.createElement(tag);
-    elementoDom.classList.add(className);
-    elementoDom.append(content);
-    return elementoDom;
-}
+function generatoreElementoInDom (tag, className, content) {
+    const elemento = document.createElement(tag);
+    elemento.classList.add(className);
+    elemento.append(content);
+    //<div class="cella">i</div>
+    return elemento;
+};
 
 //funzione calcolo logica del cellNumber
 function setCellNumber(level) {
@@ -52,40 +52,45 @@ function setCellNumber(level) {
             cellNumber = 100;
             break;
     }
+
     return cellNumber;
-}
+};
 
 //funzione creazione della board in base al livello scelto dall'utente
-function createBoard (mainElement, cellNumber) {
+function generatoreBoardGioco (mainElement, cellNumber) {
     const celle = Math.sqrt(cellNumber);
-
     const fragment = document.createDocumentFragment();
     for(let i = 1; i <= cellNumber; i++) {
         //invocata funzione (generatore elementi in DOM) in altra funzione
-        const myElementDom = generatoreElementiDom('div', 'cella', i);
-        // myElementDom.style.width = `calc(100% / ${celle})`;
-        // myElementDom.style.height = myElementDom.style.width;
-        myElementDom.classList.add(`cella-${celle}`);
-        fragment.append(myElementDom);
-        myElementDom.addEventListener('click', 
-        function() {
-            myElementDom.classList.add('blu')
-            console.log(i);
-        })
+        const elementoCellainDom = generatoreElementoInDom('div', 'cella', i);
+        // elementoCellainDom.style.width = `calc(100% / ${celle})`;
+        // elementoCellainDom.style.height = elementoCellainDom.style.width;
+        elementoCellainDom.classList.add(`cella-${celle}`);
+        elementoCellainDom.addEventListener('click', function() {
+            console.log(elementoCellainDom.innerHTML);
+            elementoCellainDom.classList.add('blu');
+        });
+    fragment.append(elementoCellainDom);
     }
-    mainElement.append(fragment);
-};
-
+mainElement.append(fragment);
+}
 
 // campominato
 function campoMinato () {
+    resetGame();
+    const gridGame = document.querySelector('.bottom-board');
     textPlay.classList.add('d-none');
-    let level = 'pro'; //TODO SELECT INPUT UTENTE
+    let level = 'principiante'; //TODO SELECT INPUT UTENTE
     const cellNumber = setCellNumber(level);
     console.log(cellNumber);
-    createBoard(boxCelle, cellNumber);
-};
+    generatoreBoardGioco(gridGame, cellNumber);
+}
 
+// function per svuotare campi
+function resetGame () {
+    const gridGame = document.querySelector('.bottom-board');
+    gridGame.innerHTML = '';
+}
 
 //                          OPERATIONS
 
@@ -94,9 +99,7 @@ const celleLivello1 = 100;
 
 
 // Js e Dom
-const gridGame = document.getElementById('bottom-board');
-
-const boxCelle = document.createElement('div');
+const gridGame = document.querySelector('.bottom-board');
 
 const playButton = document.querySelector('input.play');
 
@@ -106,12 +109,9 @@ const textPlay = document.querySelector('.play-text');
 
 const levelGame = document.getElementById('level-game');
 
-boxCelle.classList.add('box-celle','d-flex', 'flex-wrap', 'text-center', 'align-start');
-
-gridGame.append(boxCelle);
-
 playButton.addEventListener('click', campoMinato);
 
+resetButton.addEventListener('click', resetGame);
 
 
 
